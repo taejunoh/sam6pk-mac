@@ -1,0 +1,6 @@
+# 용량 큰 Wine 바이너리 — Releases 에셋으로 배포 (git 미포함)
+assets/wine.tar
+# 빌드 산출물
+*.zip
+# macOS
+.DS_Store

@@ -1,0 +1,18 @@
+이 패키지에 포함된 Wine 에 대하여
+======================================
+
+이 도구는 Wine (WineHQ Stable) 을 포함합니다.
+Wine 은 GNU LGPL (Lesser General Public License) 하에 배포되는
+자유 소프트웨어입니다.
+
+- 공식 웹사이트 : https://www.winehq.org
+- 소스 코드     : https://gitlab.winehq.org/wine/wine
+- 라이선스 전문 : https://www.winehq.org/license
+
+포함된 Wine 은 한글 렌더링 문제 수정을 위해 최소한으로 수정되었습니다
+(시스템 비트맵 폰트 파일 hvgasys.fon 제거). 이는 LGPL 이 허용하는 범위입니다.
+
+AppleGothic 폰트는 이 패키지에 포함되어 있지 않으며,
+설치 시 사용자 본인의 macOS 시스템에서 복사됩니다.
+
+게임(삼국지6) 은 이 패키지에 포함되어 있지 않습니다.
