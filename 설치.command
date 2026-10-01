@@ -39,6 +39,24 @@ echo
 [ -d "$AS/reg" ]       || die "assets/reg 폴더를 찾을 수 없습니다."
 [ -f "$APPLEGOTHIC" ]  || die "macOS 한글 폰트(AppleGothic)를 찾을 수 없습니다. macOS가 맞나요?"
 
+# Rosetta 2 확인 (Apple Silicon 전용) — Wine 은 Intel 용이라 Rosetta 가 없으면 실행 자체가 안 됨
+need_rosetta() { [ "$(uname -m)" = "arm64" ] && ! arch -x86_64 /usr/bin/true 2>/dev/null; }
+if need_rosetta; then
+  echo "  ▶ Rosetta 2 가 설치돼 있지 않습니다."
+  echo "    Wine 은 Intel 용이라 Apple Silicon 맥에서는 Rosetta 2 가 필요합니다."
+  echo "    (macOS 업데이트 후 빠지는 경우가 있습니다.)"
+  echo "    지금 설치합니다. 라이선스 동의를 물으면 A 를 입력하고 Enter 를 누르세요."
+  echo "    (한글 입력 상태면 'ㅁ' 이 입력되니, 한/영 키로 영문으로 바꾼 뒤 A)"
+  /usr/sbin/softwareupdate --install-rosetta
+  if need_rosetta; then
+    echo "  ▶ 다시 시도합니다. 맥 로그인 암호를 물으면 입력해 주세요 (입력해도 화면에 안 보입니다)."
+    sudo /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+  fi
+  need_rosetta && die "Rosetta 2 설치에 실패했습니다. 터미널에서 softwareupdate --install-rosetta 를 실행한 뒤 다시 설치하세요."
+  echo "  · Rosetta 2 설치 완료"
+  echo
+fi
+
 # --- 게임 폴더 선택 ---
 echo "  ▶ 삼국지6 게임 폴더를 선택하세요 (SAM6.EXE 가 들어있는 폴더)."
 GAMEDIR="$(osascript -e 'POSIX path of (choose folder with prompt "삼국지6 게임 폴더(SAM6.EXE가 있는 폴더)를 선택하세요")' 2>/dev/null)"
@@ -98,6 +116,11 @@ export WINEDLLOVERRIDES="mscoree,mshtml="
 export WINEDEBUG=-all
 export LANG="ko_KR.UTF-8"
 export LC_ALL="ko_KR.UTF-8"
+need_rosetta() { [ "\$(uname -m)" = "arm64" ] && ! arch -x86_64 /usr/bin/true 2>/dev/null; }
+if need_rosetta; then
+  osascript -e 'display dialog "Rosetta 2가 없어 실행할 수 없습니다.\n터미널에서 softwareupdate --install-rosetta 를 실행한 뒤 다시 열어 주세요." with title "삼국지6" with icon caution buttons {"확인"} default button "확인"' >/dev/null 2>&1
+  exit 1
+fi
 "\$WINESERVER" -k 2>/dev/null
 sleep 1
 cd "$GAMEDIR"

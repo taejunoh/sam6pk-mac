@@ -6,7 +6,7 @@ REPO="$(pwd)"; NAME="삼국지6-mac"
 if [ ! -f "assets/wine.tar" ]; then
   echo "❌ assets/wine.tar 가 없습니다."
   echo "   폰트픽스 Wine을 tar로 만들어 넣으세요:"
-  echo '   tar -cf assets/wine.tar -C /Applications "Wine Stable.app"'
+  echo '   tar -cf assets/wine.tar -C "$HOME/Library/Application Support/삼국지6" "Wine Stable.app"'
   echo "   (자세히: assets/wine.tar.README.txt)"
   exit 1
 fi

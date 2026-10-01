@@ -11,16 +11,31 @@
 
 ## ⬇️ 설치 (사용자용)
 
-1. **[Releases](../../releases)** 에서 최신 `삼국지6-mac.zip` 을 받습니다.
+1. **[Releases](../../releases)** 에서 최신 `sam6pk-mac.zip` 을 받습니다.
 2. 압축을 풀고 **`설치.command`** 를 더블클릭합니다.
    - "확인할 수 없는 개발자" 경고 → **우클릭 → 열기 → 열기**
 3. 폴더 선택창에서 **본인 삼국지6 게임 폴더**(`SAM6.EXE` 가 있는 폴더)를 지정합니다.
 4. 설치가 끝나면 **바탕화면 '삼국지6' 아이콘**으로 실행합니다.
 
+> Apple Silicon(M1 이후) 맥은 **Rosetta 2** 가 필요합니다. 설치 프로그램이 없으면 자동으로 설치해 줍니다
+> (라이선스 동의를 물으면 **영문 입력 상태에서** `A` 를 입력하세요. 맥 로그인 암호를 물을 수도 있습니다).
+
 ### 게임 시작 요령
 - "CD-ROM" 창 → **취소**
 - "화면 재생 실패" → **확인**
 - 초기설정에서 새 게임 / 데이터 로드 / 전술 시뮬레이션 선택
+
+---
+
+## 🧯 문제 해결
+
+**macOS 업데이트 후 실행이 안 됨 / 설치 중 'Bad CPU type' 오류** → Rosetta 2 가 빠진 것입니다. 터미널에서 재설치하세요.
+
+```bash
+softwareupdate --install-rosetta
+```
+
+라이선스 동의를 물으면 영문 입력 상태에서 `A` 를 입력하고 Enter.
 
 ---
 
@@ -66,7 +81,7 @@ LICENSE-Wine.txt        # 포함된 Wine 라이선스 안내 (LGPL)
 → `삼국지6-mac.zip` 이 만들어집니다. 이 파일을 GitHub **Releases** 에 업로드하세요.
 
 `wine.tar` 만드는 법: 한글 폰트픽스(시스템폰트 `hvgasys.fon` 제거)를 적용한 Wine 앱을
-`tar -cf assets/wine.tar -C /Applications "Wine Stable.app"` 로 묶습니다. ([`docs/기술설명.md`](docs/기술설명.md) 참고)
+`tar -cf assets/wine.tar -C "$HOME/Library/Application Support/삼국지6" "Wine Stable.app"` 로 묶습니다. ([`docs/기술설명.md`](docs/기술설명.md) 참고)
 
 ---
 

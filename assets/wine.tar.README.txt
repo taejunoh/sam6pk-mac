@@ -6,6 +6,6 @@ wine.tar = 한글 폰트픽스를 적용한 Wine 앱을 tar 로 묶은 것.
   2) 폰트픽스: 아래 파일 제거(이름 변경)
      .../Wine Stable.app/Contents/Resources/wine/share/wine/fonts/hvgasys.fon
      → hvgasys.fon.bak
-  3) tar -cf assets/wine.tar -C /Applications "Wine Stable.app"
+  3) tar -cf assets/wine.tar -C "$HOME/Library/Application Support/삼국지6" "Wine Stable.app"
 
 배포본(삼국지6-mac.zip)에는 이 wine.tar 가 포함되며, GitHub Releases 로 제공합니다.
