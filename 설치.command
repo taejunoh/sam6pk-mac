@@ -19,6 +19,7 @@ PREFIX="$HOME/.wine-sam6"
 WINE="$ROOT/Wine Stable.app/Contents/Resources/wine/bin/wine"
 WINESERVER="$ROOT/Wine Stable.app/Contents/Resources/wine/bin/wineserver"
 APPLEGOTHIC="/System/Library/Fonts/Supplemental/AppleGothic.ttf"
+SDGOTHIC="/System/Library/Fonts/AppleSDGothicNeo.ttc"
 
 die() { echo; echo "❌ 설치 실패: $1"; echo; printf "[Enter]를 눌러 닫기 ... "; read _ 2>/dev/null || true; exit 1; }
 
@@ -94,6 +95,15 @@ export LC_ALL="ko_KR.UTF-8"
 # --- 3. 한글 폰트 설치 ---
 echo "  [3/5] 한글 폰트(AppleGothic) 설치 중..."
 cp "$APPLEGOTHIC" "$PREFIX/drive_c/windows/Fonts/applegothic.ttf" || die "폰트 복사 실패"
+# 툴바 군주 이름("System" 폰트, 한글 charset) 픽스 — 엔진을 고치지 않는 방식.
+# Wine 은 코드페이지 949 의 시스템 비트맵 폰트(hvgasys.fon)를 C:\windows\Fonts 에서 먼저 찾으므로,
+# 그 이름으로 한글 폰트를 두면 엔진의 한글 없는 hvgasys.fon 대신 이것이 쓰인다.
+# (ARM64 엔진처럼 서명돼 수정할 수 없는 엔진에서도 동작. docs/macOS28-대응계획.md 4절)
+if [ -f "$SDGOTHIC" ]; then
+  cp "$SDGOTHIC" "$PREFIX/drive_c/windows/Fonts/hvgasys.fon" || die "폰트 복사 실패"
+else
+  echo "  · (참고) Apple SD Gothic Neo 가 없어 툴바 폰트 보조 설정을 건너뜁니다."
+fi
 
 # --- 4. 한글/폰트픽스 레지스트리 주입 ---
 echo "  [4/5] 한글 설정(폰트 매핑/가상데스크톱) 적용 중..."
