@@ -46,12 +46,13 @@ macOS 28 베타(예상: 2027-06 WWDC)가 나오면 그날 바로 돌려 보는 �
 macOS 28 에서 지금 경로가 살아남더라도 함께 확인합니다. 그다음 해(macOS 29)를 대비하기 위해서입니다.
 
 - [ ] **Rosetta 가 없는 상태**인지 확인 (`arch -x86_64 /usr/bin/true` 가 실패해야 의미 있는 테스트)
-- [ ] 후보 엔진 설치: CrossOver 27 arm64 / Mach9 최신판
+- [ ] 후보 엔진 설치: Mach9 (macOS 27 에서 검증한 `arm64-11.20-5` 부터) / CrossOver 27 arm64
 - [ ] 새 win64 prefix 생성 → AppleGothic 복사 + `assets/reg/*.reg` 적용 → [엔진 독립 폰트 픽스](macOS28-대응계획.md#4-프로토타입--엔진-독립-한글-폰트-픽스) 적용
 - [ ] `LANG=ko_KR.UTF-8 LC_ALL=ko_KR.UTF-8` 로 SAM6.EXE 실행 (CrossOver 는 bottle 설정 `LC_ALL`)
 - [ ] 2단계의 한글·전투·사운드·세이브 항목을 똑같이 확인
 - [ ] `Activity Monitor` 의 "종류" 열이 `Apple` 인지 확인 (`Intel` 이면 Rosetta 로 돌고 있는 것)
-- [ ] 전투 중 CPU 패턴: 처리할 때 올라가고 입력을 기다릴 때 내려가면 정상. 한 프레임에서 멈춘 채 무응답이면 프리징
+- [ ] `/usr/lib/libRosetta.dylib`·`liboah.dylib` 가 사라져도 엔진이 뜨는지 (Mach9 프로세스가 이 둘을 매핑함. `vmmap <pid> | grep -i -E "rosetta|oah"`)
+- [ ] 프리징 판단: 맵에서 입력을 기다릴 때도 CPU 가 약 100% 인 건 이 게임의 정상 동작입니다(Rosetta 엔진도 같음). **화면이 한 프레임에서 멈추고 클릭에 반응하지 않으면** 프리징
 
 ## 결과 기록
 
@@ -60,3 +61,4 @@ macOS 28 에서 지금 경로가 살아남더라도 함께 확인합니다. 그�
 | 날짜 | macOS 빌드 | 맥 | 경로 | 1단계 5·6 | 한글 | 툴바 이름 | 전투 10분 | 비고 |
 |---|---|---|---|---|---|---|---|---|
 | 2026-11-06 | 27.0.1 (26A434) | Apple Silicon | Wine Stable 11.0 + Rosetta | PASS | ✅ | ✅ | ✅ (7월 검증) | 기준값 |
+| 2026-11-06 | 27.0.1 (26A434) | Apple Silicon | **Mach9 arm64-11.20-5 + FEX (Rosetta 미사용)** | — | ✅ | ✅ (prefix 픽스) | ✅ (적벽 수전 합계 약 20분, 멈춤 0) | [계획 5절](macOS28-대응계획.md#5-실측--mach9-arm64-엔진-검증-2026-11-06) |

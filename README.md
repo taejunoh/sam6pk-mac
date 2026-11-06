@@ -44,6 +44,7 @@ softwareupdate --install-rosetta
 Apple 은 Rosetta 2 를 **macOS 27 까지만** 범용으로 제공합니다 ([Apple 지원](https://support.apple.com/en-us/102527)). 이 도구의 Wine 은 Intel(x86_64)용이라 macOS 28 에서 계속 동작한다는 보장이 없습니다.
 
 - **지금(macOS 27 이하)은 그대로 쓰시면 됩니다.**
+- Rosetta 없이 도는 ARM64 Wine 엔진(Mach9)으로 한글·전투·세이브까지 확인했습니다(2026-11). 설치 도구에 넣는 작업은 진행 중입니다.
 - 대응 방향(ARM64 네이티브 Wine + FEX 로 엔진 교체)과 대안 비교: [`docs/macOS28-대응계획.md`](docs/macOS28-대응계획.md)
 - macOS 28 베타가 나오면 바로 확인하는 방법: [`docs/macOS28-체크리스트.md`](docs/macOS28-체크리스트.md) — 자동 점검 스크립트 `scripts/macos28-check.command` 를 실행합니다(읽기 전용).
 
