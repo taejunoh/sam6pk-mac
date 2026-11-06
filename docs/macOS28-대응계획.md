@@ -98,7 +98,7 @@ macOS 27.0.1 맥에서 `file` 명령으로 확인한 결과입니다.
 | 1 | 지금 | 점검 스크립트 `scripts/macos28-check.command`, 베타 체크리스트 | ✅ 이번 작업 |
 | 2 | 지금 | **엔진을 고치지 않는 한글 폰트 픽스** ([4단계](#4-프로토타입--엔진-독립-한글-폰트-픽스)) — 검증 완료, 설치 도구에 반영 | ✅ 이번 작업 |
 | 3 | 2026-11 | 맥에서 ARM64 엔진으로 SAM6 실행 검증: 한글(메뉴·툴바), 장시간 전투, 사운드, 세이브. **Mach9 은 통과** ([5절](#5-실측--mach9-arm64-엔진-검증-2026-11-06)). CrossOver arm64 Preview 는 유료 고객 전용이라 정식판(2027년 초)에서 확인 | ✅ Mach9 / ⏳ CrossOver |
-| 4 | 다음 | 설치 도구에 엔진 선택 추가: Apple Silicon + macOS 26.4 이상이면 ARM64 엔진, 아니면 지금의 Wine Stable(Rosetta). 런처는 엔진 경로만 바꿈 | ⏳ |
+| 4 | 2026-11 | 설치 도구에 엔진 선택 추가 (v1.3): Apple Silicon + macOS 26.4 이상이면 설치 중 선택(macOS 28 이상은 Mach9 자동), 아니면 지금의 Wine Stable(Rosetta). 런처는 엔진 경로만 바꿈 | ✅ |
 | 5 | 2027-06 (WWDC, macOS 28 베타) | 체크리스트 실행. Wine Stable 이 살아남는지(d), ARM64 엔진이 베타에서 도는지(a) 확인 | ⏳ |
 | 6 | macOS 28 정식 출시 전 | v2.0 배포: ARM64 엔진을 기본으로, Rosetta 경로는 macOS 27 이하용 | ⏳ |
 
@@ -186,4 +186,4 @@ cp /System/Library/Fonts/AppleSDGothicNeo.ttc "$WINEPREFIX/drive_c/windows/Fonts
 - 가끔 부대를 두 번 클릭해야 명령 창이 떴습니다. Rosetta 와 비교하지는 않았습니다.
 - Mach9 은 1인 개발 프로젝트이고 첫 arm64 릴리스가 2026-10 입니다. 업데이트가 잦으니, 설치 도구에 넣을 때는 **검증한 릴리스 버전과 SHA256 을 고정**합니다.
 
-**다음 (4단계):** 설치 도구에 엔진 선택을 추가합니다. Apple Silicon + macOS 26.4 이상이면 Mach9 엔진을 고정 버전으로 받아 SHA256 을 확인한 뒤 쓰고, 그 밖에는 지금의 Wine Stable(Rosetta)을 씁니다. macOS 28 베타가 나오면 Mach9 경로를 먼저 확인합니다.
+**4단계 반영 (2026-11):** 설치 도구에 엔진 선택을 넣었습니다. Apple Silicon + macOS 26.4~27 은 설치 중 1(기본 Wine)/2(Mach9) 중에서 고르고, macOS 28 이상은 Mach9 이 자동으로 선택됩니다. Mach9 은 위 릴리스(`arm64-11.20-5`)를 SHA256 으로 고정해 받습니다. 받지 못하면 macOS 27 이하에서는 기본 Wine 으로 대신 설치합니다. 샌드박스에서 2번 설치 → 게임 실행(ARM64) → 툴바 한글 정상, 1번 설치, 다운로드 실패 시 대체 설치, macOS 28 흉내(자동 선택, 실패 시 중단)를 확인했습니다.

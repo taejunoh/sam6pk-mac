@@ -17,7 +17,11 @@
 3. 폴더 선택창에서 **본인 삼국지6 게임 폴더**(`SAM6.EXE` 가 있는 폴더)를 지정합니다.
 4. 설치가 끝나면 **바탕화면 '삼국지6' 아이콘**으로 실행합니다.
 
-> Apple Silicon(M1 이후) 맥은 **Rosetta 2** 가 필요합니다. 설치 프로그램이 없으면 자동으로 설치해 줍니다
+> **엔진 선택:** Apple Silicon + macOS 26.4 이상이면 설치 중에 실행 엔진을 고를 수 있습니다 (1 기본 Wine / 2 Mach9 ARM64 Wine).
+> macOS 28 이상이면 Rosetta 가 없으므로 Mach9 이 자동으로 선택됩니다.
+> Mach9 은 설치 중에 GitHub([athei/wine-build](https://github.com/athei/wine-build))에서 고정 버전을 받아 SHA256 을 확인한 뒤 설치합니다 (인터넷 필요, 약 130MB).
+>
+> 기본 Wine 을 쓰는 Apple Silicon(M1 이후) 맥은 **Rosetta 2** 가 필요합니다. 설치 프로그램이 없으면 자동으로 설치해 줍니다
 > (라이선스 동의를 물으면 **영문 입력 상태에서** `A` 를 입력하세요. 맥 로그인 암호를 물을 수도 있습니다).
 
 ### 게임 시작 요령
@@ -44,7 +48,7 @@ softwareupdate --install-rosetta
 Apple 은 Rosetta 2 를 **macOS 27 까지만** 범용으로 제공합니다 ([Apple 지원](https://support.apple.com/en-us/102527)). 이 도구의 Wine 은 Intel(x86_64)용이라 macOS 28 에서 계속 동작한다는 보장이 없습니다.
 
 - **지금(macOS 27 이하)은 그대로 쓰시면 됩니다.**
-- Rosetta 없이 도는 ARM64 Wine 엔진(Mach9)으로 한글·전투·세이브까지 확인했습니다(2026-11). 설치 도구에 넣는 작업은 진행 중입니다.
+- Rosetta 없이 도는 ARM64 Wine 엔진(Mach9)으로 한글·전투·세이브까지 확인했습니다(2026-11). Apple Silicon + macOS 26.4 이상이면 설치할 때 **2번(Mach9)** 을 고르면 바로 쓸 수 있습니다.
 - 대응 방향(ARM64 네이티브 Wine + FEX 로 엔진 교체)과 대안 비교: [`docs/macOS28-대응계획.md`](docs/macOS28-대응계획.md)
 - macOS 28 베타가 나오면 바로 확인하는 방법: [`docs/macOS28-체크리스트.md`](docs/macOS28-체크리스트.md) — 자동 점검 스크립트 `scripts/macos28-check.command` 를 실행합니다(읽기 전용).
 
@@ -102,6 +106,7 @@ LICENSE-Wine.txt        # 포함된 Wine 라이선스 안내 (LGPL)
 ## 📄 라이선스 / 출처
 - **이 도구(스크립트/문서)**: MIT (`LICENSE`)
 - **Wine** (배포본에 포함): LGPL — https://www.winehq.org (`LICENSE-Wine.txt`)
+- **Mach9 (ARM64 Wine + FEX)**: 설치 시 다운로드, 배포 zip 미포함 — https://github.com/athei/wine-build (zlib, Wine 은 LGPL)
 - **AppleGothic 폰트**: 배포에 미포함, 설치 시 사용자 macOS에서 복사
 - **게임(삼국지6)**: 미포함. 각자 본인 소유 게임을 사용하세요.
 
